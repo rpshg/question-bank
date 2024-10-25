@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Admin;
 
-
-class AdminController extends Controller
+class AdminAuthController extends Controller
 {
     public function showLoginForm() {
         return view('admin.login');
@@ -20,8 +19,7 @@ class AdminController extends Controller
         return view('admin.register');
     }
 
-    public function dashboard()
-    {
+    public function dashboard() {
         return view('admin.dashboard');
     }
 
