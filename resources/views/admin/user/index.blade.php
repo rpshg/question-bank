@@ -54,7 +54,10 @@
                         </td>
                     </tr>
                     @endforeach
-                    @include('admin.components.delete-modal')
+
+                    @if(!$admins->isEmpty())
+                        @include('admin.components.delete-modal')
+                    @endif
                 </tbody>
             </table>
         </div>

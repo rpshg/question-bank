@@ -31,7 +31,6 @@
             let modal = $(this);
             modal.find('#delete-confirm').text(entity_title);
             modal.find('#delete-entity-form').attr('action', actionUrl);
-
         });
 
 
@@ -45,4 +44,41 @@
             modal.find('#restore-confirm').text(entity_title);
             modal.find('#restore-entity-form').attr('action', actionUrl);
         });
+
+
+        // Slug generator function
+        function generateSlug(text) {
+            return text
+                .toLowerCase()                       // Convert to lowercase
+                .trim()                               // Remove whitespace from both ends
+                .replace(/[^a-z0-9\s-]/g, "")         // Remove special characters
+                .replace(/\s+/g, "-");                // Replace spaces with hyphens
+        }
+
+        // Event listener for input
+        $('#name').on('input', function() {
+            let text = $(this).val();
+            let slug = generateSlug(text);
+            document.getElementById("slug").value = slug;
+            console.log(slug);
+        });
+
+
+        // When a new avatar is uploaded, show it in blade before form submit
+        $('#avatar').change(function(event) {
+            // Get the file object
+            let file = event.target.files[0];
+            
+            // If there's a file selected
+            if (file) {
+                // Create a URL for the selected file
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    // Update the img src to the new selected image
+                    $('#avatar-preview').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(file); // Read the file as data URL
+            }
+        });
+
     });

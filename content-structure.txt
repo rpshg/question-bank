@@ -1,0 +1,10 @@
+
+For psc kharidar administration/non-technical
+Programs = Loksewa, Shikshak sewa
+job_positions = Kharidar, Subba, Adhikrit
+SYLLABUS PART ()
+
+
+
+
+now write logic to add avatar to programs and create crud for levels

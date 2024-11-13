@@ -45,6 +45,23 @@
         </li>
 
 
+        <!-- Syllabus -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSyllabus"
+                aria-expanded="true" aria-controls="collapseSyllabus">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Syllabus</span>
+            </a>
+            <div id="collapseSyllabus" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ route('program.index') }}">Programs</a>
+                    <a class="collapse-item" href="{{ route('level.index') }}">Job Levels</a>
+                    <a class="collapse-item" href="{{ route('lesson.index') }}">Lessons</a>
+                </div>
+            </div>
+        </li>
+
+
         <!-- Admin user management -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"

@@ -17,7 +17,10 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
+   
 </head>
 
 <body id="page-top">
@@ -90,6 +93,8 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('backend/js/demo/datatables-demo.js') }}"></script>
+
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
 </body>
 
