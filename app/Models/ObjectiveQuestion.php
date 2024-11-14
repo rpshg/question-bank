@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Lesson extends Model
+class ObjectiveQuestion extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'program_id',
         'level_id',
+        'lesson_id',
         'name',
-        'no_of_mcqs'
+        'question',
     ];
-
 
     public function program(){
         return $this->belongsTo(Program::class,'program_id','id');
@@ -26,7 +26,7 @@ class Lesson extends Model
         return $this->belongsTo(Level::class,'level_id','id');
     }
 
-    public function objective_questions(){
-        return $this->hasMany(ObjectiveQuestion::class,'lesson_id');
+    public function lesson(){
+        return $this->belongsTo(Lesson::class,'lesson_id','id');
     }
 }

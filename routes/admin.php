@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\AdminsController;
 use App\Http\Controllers\Backend\ProgramController;
 use App\Http\Controllers\Backend\LevelController;
 use App\Http\Controllers\Backend\LessonController;
+use App\Http\Controllers\Backend\ObjectiveQuestionController;
 
 Route::group(['prefix' => 'admin'], function() {
 
@@ -45,13 +46,19 @@ Route::group(['prefix' => 'admin'], function() {
         Route::post('/lesson/restore/{id}', [LessonController::class, 'restore']);
         Route::delete('/lesson/remove/{id}', [LessonController::class, 'permanentDelete']);
 
+        //objective-question
+        Route::get('/obj-question/trash', [ObjectiveQuestionController::class, 'getSoftDeleted'])->name('obj-question.trash');
+        Route::post('/obj-question/restore/{id}', [ObjectiveQuestionController::class, 'restore']);
+        Route::delete('/obj-question/remove/{id}', [ObjectiveQuestionController::class, 'permanentDelete']);
+
 
         // resource routes
         Route::resources([
-            'admin-user'        => AdminsController::class,
-            'program'           => ProgramController::class,
-            'level'             => LevelController::class,
-            'lesson'            => LessonController::class,
+            'admin-user'                    => AdminsController::class,
+            'program'                       => ProgramController::class,
+            'level'                         => LevelController::class,
+            'lesson'                        => LessonController::class,
+            'obj-question'                  => ObjectiveQuestionController::class,
         ]); 
     });
     
@@ -66,6 +73,7 @@ Route::group(['prefix' => 'admin'], function() {
     });
     
 });
+
 
 
 

@@ -57,6 +57,7 @@
                     <a class="collapse-item" href="{{ route('program.index') }}">Programs</a>
                     <a class="collapse-item" href="{{ route('level.index') }}">Job Levels</a>
                     <a class="collapse-item" href="{{ route('lesson.index') }}">Lessons</a>
+                    <a class="collapse-item" href="{{ route('obj-question.index') }}">Objective Questions</a>
                 </div>
             </div>
         </li>

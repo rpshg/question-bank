@@ -31,4 +31,8 @@ class Level extends Model
     public function lessons(){
         return $this->hasMany(Lesson::class,'level_id');
     }
+
+    public function objective_questions(){
+        return $this->hasMany(ObjectiveQuestion::class,'level_id');
+    }
 }

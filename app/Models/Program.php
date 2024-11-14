@@ -31,4 +31,8 @@ class Program extends Model
         return $this->hasMany(Lesson::class,'program_id');
     }
 
+    public function objective_questions(){
+        return $this->hasMany(ObjectiveQuestion::class,'program_id');
+    }
+
 }
