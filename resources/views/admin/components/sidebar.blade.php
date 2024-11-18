@@ -21,15 +21,15 @@
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider">
+        <!-- <hr class="sidebar-divider"> -->
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+        <!-- <div class="sidebar-heading">
             Interface
-        </div>
+        </div> -->
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
@@ -42,7 +42,7 @@
                     <a class="collapse-item" href="cards.html">Cards</a>
                 </div>
             </div>
-        </li>
+        </li> -->
 
 
         <!-- Syllabus -->
@@ -79,7 +79,7 @@
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-wrench"></i>
@@ -95,18 +95,18 @@
                     <a class="collapse-item" href="utilities-other.html">Other</a>
                 </div>
             </div>
-        </li>
+        </li> -->
 
         <!-- Divider -->
-        <hr class="sidebar-divider">
+        <!-- <hr class="sidebar-divider"> -->
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+        <!-- <div class="sidebar-heading">
             Addons
-        </div>
+        </div> -->
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
@@ -124,27 +124,27 @@
                     <a class="collapse-item" href="#">Blank Page</a>
                 </div>
             </div>
-        </li>
+        </li> -->
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="charts.html">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Charts</span></a>
-        </li>
+        </li> -->
 
         <!-- Nav Item - Tables -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="tables.html">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Tables</span></a>
-        </li>
+        </li> -->
 
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+        <!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
         <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
+        <!-- <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+        </div> -->
     </ul>
