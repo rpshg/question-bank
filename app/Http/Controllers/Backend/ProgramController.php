@@ -144,7 +144,13 @@ class ProgramController extends Controller
      */
     public function permanentDelete($id)
     {
-        $this->program->onlyTrashed()->find($id)->forceDelete();
+        $program = $this->program->onlyTrashed()->find($id)->forceDelete();
+
+        if ($program->avatar) {
+            Storage::disk('public')->delete($program->avatar);
+        }
+
+        $program->forceDelete();
         return redirect()->route('program.trash')->with('success','Program permanently deleted');
     }
 }
