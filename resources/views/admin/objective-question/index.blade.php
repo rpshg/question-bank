@@ -4,9 +4,9 @@
 <div class="d-flex justify-content-between mb-4">
     <h1 class="h3 text-gray-800">{{ $title }}</h1>
     @if(session('success'))
-        <div id="success-message" class="alert alert-success">
-            {{ session('success') }}
-        </div>
+    <div id="success-message" class="alert alert-success">
+        {{ session('success') }}
+    </div>
     @endif
     <div>
         <a href="{{ route('obj-question.create') }}" class="btn btn-success btn-circle ml-3">
@@ -14,6 +14,9 @@
         </a>
         <a href="{{ route('obj-question.trash') }}" class="btn btn-warning btn-circle ml-3">
             <i class="fas fa-exclamation-triangle"></i>
+        </a>
+        <a href="{{ route('import-objective-qn') }}">
+            <button class="btn btn-primary btn-sm">import excel</button>
         </a>
     </div>
 </div>
@@ -48,7 +51,7 @@
                         <td>{{ $question->program->name ?? '-' }}</td>
                         <td>{{ $question->level->name ?? '-' }}</td>
                         <td>{{ $question->lesson->name ?? '-' }}</td>
-                        
+
                         <td>
                             <a href="{{ route('obj-question.edit',$question->id) }}" class="btn btn-info btn-circle">
                                 <i class="fas fa-edit fa-circle"></i>
@@ -62,7 +65,7 @@
                     @endforeach
 
                     @if(!$questions->isEmpty())
-                      @include('admin.components.delete-modal')
+                    @include('admin.components.delete-modal')
                     @endif
                 </tbody>
             </table>

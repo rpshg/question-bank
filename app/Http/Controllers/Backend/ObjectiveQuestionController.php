@@ -11,6 +11,7 @@ use App\Models\ObjectiveQuestion;
 use Illuminate\Http\Request;
 use App\Http\Requests\ObjectiveQuestion\StoreObjectiveQuestionRequest;
 use App\Http\Requests\ObjectiveQuestion\UpdateObjectiveQuestionRequest;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class ObjectiveQuestionController extends Controller
 {
@@ -19,7 +20,8 @@ class ObjectiveQuestionController extends Controller
     private $lesson;
     private $question;
 
-    public function __construct(Program $program, Level $level, Lesson $lesson, ObjectiveQuestion $question){
+    public function __construct(Program $program, Level $level, Lesson $lesson, ObjectiveQuestion $question)
+    {
         $this->middleware('auth:admin');
         $this->program      = $program;
         $this->level        = $level;
@@ -34,7 +36,7 @@ class ObjectiveQuestionController extends Controller
     {
         $questions        = $this->question->query();
         $questions        = $questions->get();
-        return view('admin.objective-question.index', compact('questions'))->with('title','Objective questions');
+        return view('admin.objective-question.index', compact('questions'))->with('title', 'Objective questions');
     }
 
     /**
@@ -42,11 +44,11 @@ class ObjectiveQuestionController extends Controller
      */
     public function create()
     {
-        $programs = $this->program->pluck('name','id');
-        $levels = $this->level->pluck('name','id');
-        $lessons = $this->lesson->pluck('name','id');
+        $programs = $this->program->pluck('name', 'id');
+        $levels = $this->level->pluck('name', 'id');
+        $lessons = $this->lesson->pluck('name', 'id');
         $question = $this->question;
-        return view('admin.objective-question.create', compact('programs','levels','lessons','question'))->with('title','Create objective question');
+        return view('admin.objective-question.create', compact('programs', 'levels', 'lessons', 'question'))->with('title', 'Create objective question');
     }
 
     /**
@@ -69,27 +71,24 @@ class ObjectiveQuestionController extends Controller
         $this->question->explanation              = $request->explanation;
         $this->question->save();
 
-        return redirect()->route('obj-question.index')->with('success','Objective question created successfully');
+        return redirect()->route('obj-question.index')->with('success', 'Objective question created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show()
-    {
-        
-    }
+    public function show() {}
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $programs = $this->program->pluck('name','id');
-        $levels = $this->level->pluck('name','id');
-        $lessons = $this->lesson->pluck('name','id');
+        $programs = $this->program->pluck('name', 'id');
+        $levels = $this->level->pluck('name', 'id');
+        $lessons = $this->lesson->pluck('name', 'id');
         $question = $this->question->find($id);
-        return view('admin.objective-question.edit', compact('programs','levels','lessons','question'))->with('title','Edit objective question');
+        return view('admin.objective-question.edit', compact('programs', 'levels', 'lessons', 'question'))->with('title', 'Edit objective question');
     }
 
     /**
@@ -112,10 +111,10 @@ class ObjectiveQuestionController extends Controller
         $question->option_5              = $request->option_5;
         $question->option_6              = $request->option_6;
         $question->explanation           = $request->explanation;
-        
+
         $question->save();
 
-        return redirect()->route('obj-question.index')->with('success','Objective question updated successfully');
+        return redirect()->route('obj-question.index')->with('success', 'Objective question updated successfully');
     }
 
     /**
@@ -135,8 +134,8 @@ class ObjectiveQuestionController extends Controller
     public function getSoftDeleted()
     {
         $questions = $this->question->onlyTrashed()->get();
-        return view('admin.objective-question.trash', compact('questions'))->with('title','Soft deleted objective questions');
-    }  
+        return view('admin.objective-question.trash', compact('questions'))->with('title', 'Soft deleted objective questions');
+    }
 
 
     /**
@@ -157,6 +156,49 @@ class ObjectiveQuestionController extends Controller
     {
         $question = $this->question->onlyTrashed()->find($id);
         $question->forceDelete();
-        return redirect()->route('obj-question.trash')->with('success','Objective question permanently deleted');
+        return redirect()->route('obj-question.trash')->with('success', 'Objective question permanently deleted');
+    }
+
+    /**
+     * Show import page.
+     */
+    public function import()
+    {
+        $programs = $this->program->pluck('name', 'id');
+        $levels = $this->level->pluck('name', 'id');
+        $lessons = $this->lesson->pluck('name', 'id');
+        return view('admin.objective-question.import', compact('programs', 'levels', 'lessons'))->with('title', 'Import objective questions(excel)');
+    }
+
+    /**
+     * Post import data to database
+     */
+    public function importObjectiveQuestion(Request $request)
+    {
+        $program_id                 = intval($request->program_id);
+        $level_id                   = intval($request->level_id);
+        $lesson_id                  = intval($request->lesson_id);
+
+        $file = $request->file('file');
+        (new FastExcel)->import($file, function ($row) use ($program_id, $level_id, $lesson_id) {
+            $validStatus = ['APPROVED', 'PENDING', 'DISAPPROVED'];
+            return $this->question::create([
+                'program_id'                    => $program_id,
+                'level_id'                      => $level_id,
+                'lesson_id'                     => $lesson_id,
+                'question'                      => $row['question'],
+                'correct_answer'                => $row['correct_answer'],
+                'option_1'                      => $row['option_1'],
+                'option_2'                      => $row['option_2'],
+                'option_3'                      => $row['option_3'],
+                'option_4'                      => $row['option_4'],
+                'option_5'                      => $row['option_5'],
+                'option_6'                      => $row['option_6'],
+                'explanation'                   => $row['explanation'],
+                'status'                        => in_array($row['status'], $validStatus) ? $row['status'] : 'PENDING', // Default to 'PENDING' if invalid
+            ]);
+        });
+
+        return back()->with('success', 'Objective questions imported successfully!');
     }
 }

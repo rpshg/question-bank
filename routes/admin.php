@@ -9,7 +9,7 @@ use App\Http\Controllers\Backend\LevelController;
 use App\Http\Controllers\Backend\LessonController;
 use App\Http\Controllers\Backend\ObjectiveQuestionController;
 
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/', function () {
         if (auth('admin')->check()) {
@@ -18,10 +18,10 @@ Route::group(['prefix' => 'admin'], function() {
             return redirect()->route('admin.login'); // Redirect to login if not authenticated
         }
     });
-    
+
     // for authenticated admin
-    Route::group(['middleware' => ['auth:admin']], function () {  
-     
+    Route::group(['middleware' => ['auth:admin']], function () {
+
         // admin profile
         Route::get('dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
         Route::post('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
@@ -50,6 +50,8 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/obj-question/trash', [ObjectiveQuestionController::class, 'getSoftDeleted'])->name('obj-question.trash');
         Route::post('/obj-question/restore/{id}', [ObjectiveQuestionController::class, 'restore']);
         Route::delete('/obj-question/remove/{id}', [ObjectiveQuestionController::class, 'permanentDelete']);
+        Route::get('/obj-question/import', [ObjectiveQuestionController::class, 'import'])->name('import-objective-qn');
+        Route::post('/obj-question/import', [ObjectiveQuestionController::class, 'importObjectiveQuestion']);
 
 
         // resource routes
@@ -59,21 +61,16 @@ Route::group(['prefix' => 'admin'], function() {
             'level'                         => LevelController::class,
             'lesson'                        => LessonController::class,
             'obj-question'                  => ObjectiveQuestionController::class,
-        ]); 
+        ]);
     });
-    
+
 
     // for guests
     Route::group(['middleware' => ['guest:admin']], function () {
         Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
         Route::post('/login', [AdminAuthController::class, 'login']);
-    
+
         Route::get('/register', [AdminAuthController::class, 'showRegisterForm'])->name('admin.register');
         Route::post('/register', [AdminAuthController::class, 'register']);
     });
-    
 });
-
-
-
-
