@@ -175,11 +175,13 @@ class ObjectiveQuestionController extends Controller
      */
     public function importObjectiveQuestion(Request $request)
     {
+
         $program_id                 = intval($request->program_id);
         $level_id                   = intval($request->level_id);
         $lesson_id                  = intval($request->lesson_id);
 
-        $file = $request->file('file');
+        $file = $request->file('import_file');
+        
         (new FastExcel)->import($file, function ($row) use ($program_id, $level_id, $lesson_id) {
             $validStatus = ['APPROVED', 'PENDING', 'DISAPPROVED'];
             return $this->question::create([
@@ -199,6 +201,6 @@ class ObjectiveQuestionController extends Controller
             ]);
         });
 
-        return back()->with('success', 'Objective questions imported successfully!');
+        return redirect()->route('obj-question.index')->with('success', 'Objective questions imported successfully');
     }
 }

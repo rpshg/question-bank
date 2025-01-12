@@ -15,8 +15,8 @@
         <a href="{{ route('obj-question.trash') }}" class="btn btn-warning btn-circle ml-3">
             <i class="fas fa-exclamation-triangle"></i>
         </a>
-        <a href="{{ route('import-objective-qn') }}">
-            <button class="btn btn-primary btn-sm">import excel</button>
+        <a href="{{ route('import-objective-qn') }}" class="btn btn-info btn-circle ml-3">
+            <i class="fas fa-upload"></i>
         </a>
     </div>
 </div>
@@ -34,6 +34,7 @@
                         <th>Program</th>
                         <th>Job Level</th>
                         <th>Lesson</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -51,6 +52,7 @@
                         <td>{{ $question->program->name ?? '-' }}</td>
                         <td>{{ $question->level->name ?? '-' }}</td>
                         <td>{{ $question->lesson->name ?? '-' }}</td>
+                        <td>{{ $question->status }}</td>
 
                         <td>
                             <a href="{{ route('obj-question.edit',$question->id) }}" class="btn btn-info btn-circle">

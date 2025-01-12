@@ -61,8 +61,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">Default file input example</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <label for="formFile" class="form-label">Import questions</label>
+                                <input class="form-control" type="file" name="import_file" id="formFile">
                             </div>
 
                             <button type="submit" class="btn btn-primary px-3 mt-3">

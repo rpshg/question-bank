@@ -16,6 +16,15 @@ class ObjectiveQuestion extends Model
         'lesson_id',
         'name',
         'question',
+        'correct_answer',
+        'option_1',
+        'option_2',
+        'option_3',
+        'option_4',
+        'option_5',
+        'option_6',
+        'explanation',
+        'status'
     ];
 
     public function program(){
